@@ -1,6 +1,7 @@
 package com.blueskykong.demo.rest;
 
 import com.blueskykong.demo.annotation.PreAuth;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import java.util.Map;
 /**
  * Created by keets on 2017/12/6.
  */
+@Slf4j
 @RestController
 public class DemoController {
 
@@ -24,9 +26,21 @@ public class DemoController {
     }
 
 
-    @GetMapping(value = "/hello")
+    @RequestMapping(value = "/hello")
     public String hello() {
-        return "hello, this is Backend demo!";
+        return "hello, this is Backend demo! /hello";
     }
+
+
+    @RequestMapping(value = "/two/hello")
+    public String helloTwo() {
+        return "hello, this is Backend demo!  /two/hello";
+    }
+
+    @RequestMapping(value = "/three/hello")
+    public String helloThree() {
+        return "hello, this is Backend demo!  /three/hello";
+    }
+
 
 }

@@ -17,9 +17,12 @@
 
     <modules>
         <module>gateway-zuul</module>
+        <module>spring-cloud-gateway-sample</module>
+
         <module>auth-server</module>
         <module>backend-server</module>
         <module>gateway-enhanced</module>
+        <module>gateway-own</module>
     </modules>
 
     <properties>
@@ -39,16 +42,16 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jsr311-api</artifactId>
-                    <groupId>javax.ws.rs</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-consul-discovery</artifactId>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>jsr311-api</artifactId>-->
+                    <!--<groupId>javax.ws.rs</groupId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

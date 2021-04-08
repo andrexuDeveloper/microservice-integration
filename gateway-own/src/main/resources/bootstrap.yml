@@ -1,0 +1,32 @@
+spring:
+  application:
+      name: gateway-server-own
+#  cloud:
+#    consul:
+#      host: ${CONSUL_ADDRESS:localhost}
+#      port: ${CONSUL_PORT:8500}
+#      discovery:
+#        port: ${SERVER_PORT:${server.port}}
+##        healthCheckPath: /health
+#        healthCheckInterval: 15s
+#        instanceId: ${spring.cloud.consul.discovery.service-name}-${spring.profiles.active}-${spring.cloud.consul.discovery.ip-address}-${random.value}
+#        ip-address: ${HOST_ADDRESS:localhost}
+#        service-name: gateway-server-own
+
+server:
+  port: 9099
+
+---
+test:
+  hostport: localhost:9099
+#  hostport: localhost:5000
+  uri: http://${test.hostport}
+
+logging:
+  level:
+    org.springframework.http.server.reactive: info
+    org.springframework.web.reactive: info
+    reactor.ipc.netty: info
+    com.blueskykong.gateway.enhanced: debug
+
+management.endpoints.web.exposure.include: '*'
