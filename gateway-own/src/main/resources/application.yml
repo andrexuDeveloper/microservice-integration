@@ -86,7 +86,7 @@ spring:
         uri: http://localhost:9092/
         order: 10000
         predicates:
-        - Path=/**
+        - Path=/22/**
         filters:
         - AddRequestParameter=foo, bar
       - id: default_path_load_web
