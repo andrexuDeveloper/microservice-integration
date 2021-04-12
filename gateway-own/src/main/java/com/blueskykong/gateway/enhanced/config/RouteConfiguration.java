@@ -38,15 +38,17 @@ public class RouteConfiguration {
                                 .modifyRequestBody(String.class, String.class,
                                         (exchange, s) -> Mono.just(s.toUpperCase())).modifyResponseBody(String.class, String.class,
                                         (exchange, s) -> Mono.just("12345"))
-                        ).uri("http://localhost:8005/body")
+                        ).uri("http://localhost:9092/three/hello")
                 )
                 .route(r -> r.path("/test5/**").and().header("X-Next-Url", ".+")
                         .filters(f -> f.requestHeaderToRequestUri("X-Next-Url"))
                         .uri("http://baidu.com"))
-                .route(r -> r.path("/test5/**").and().header("X-Next-Url", ".+")
+                .route(r -> r.path("/test5/**")
+                        //.and().header("X-Next-Url", ".+")
                         .filters(f -> f.requestHeaderToRequestUri("X-Next-Url"))
                         .uri("http://baidu.com"))
-                .route(r -> r.path("/three/hello").and().query("url")
+                .route(r -> r.path("/three/hello")
+                          //.and().query("url")
 //                        .filters(f -> f.changeRequestUri(e -> Optional.of(URI.create(
 //                                e.getRequest().getQueryParams().getFirst("url")))))
                         .filters(f ->f.stripPrefix(1))

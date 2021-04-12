@@ -11,6 +11,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+
+/**
+ *   利用资源服务器的配置，控制哪些是暴露端点不需要进行身份合法性的校验，直接路由转发，哪些是需要进行身份loadAuthentication，调用auth服务。
+ *
+ *
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {

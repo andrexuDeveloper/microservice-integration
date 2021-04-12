@@ -54,22 +54,28 @@ public class ServiceConfig {
         return resourceServerTokenServices;
     }
 
-    @Bean
-    public AuthorizationFilter authorizationFilter(CustomRemoteTokenServices customRemoteTokenServices,
-                                                   HeaderEnhanceFilter headerEnhanceFilter,
-                                                   PermitAllUrlProperties permitAllUrlProperties) {
-        return new AuthorizationFilter(customRemoteTokenServices, headerEnhanceFilter, permitAllUrlProperties);
-    }
+//    @Bean
+//    public AuthorizationFilter authorizationFilter(CustomRemoteTokenServices customRemoteTokenServices,
+//                                                   HeaderEnhanceFilter headerEnhanceFilter,
+//                                                   PermitAllUrlProperties permitAllUrlProperties) {
+//        return new AuthorizationFilter(customRemoteTokenServices, headerEnhanceFilter, permitAllUrlProperties);
+//    }
 
-    @Bean
-    public ThrottleGatewayFilterFactory throttleGatewayFilterFactory(GatewayLimitProperties gatewayLimitProperties) {
-        GatewayLimitProperties.Throttle throttle = gatewayLimitProperties.getThrottle();
-        if (Objects.isNull(throttle)) {
-            throw new ServerException(ErrorCodes.PROPERTY_NOT_INITIAL);
-        }
-        return new ThrottleGatewayFilterFactory(throttle.getCapacity(), throttle.getRefillTokens(),
-                throttle.getRefillPeriod(), TimeUnit.MILLISECONDS);
-    }
+
+    /**
+     *
+     * @param gatewayLimitProperties
+     * @return
+     */
+//    @Bean
+//    public ThrottleGatewayFilterFactory throttleGatewayFilterFactory(GatewayLimitProperties gatewayLimitProperties) {
+//        GatewayLimitProperties.Throttle throttle = gatewayLimitProperties.getThrottle();
+//        if (Objects.isNull(throttle)) {
+//            throw new ServerException(ErrorCodes.PROPERTY_NOT_INITIAL);
+//        }
+//        return new ThrottleGatewayFilterFactory(throttle.getCapacity(), throttle.getRefillTokens(),
+//                throttle.getRefillPeriod(), TimeUnit.MILLISECONDS);
+//    }
 
     @Bean
     public HeaderEnhanceFilter headerEnhanceFilter() {

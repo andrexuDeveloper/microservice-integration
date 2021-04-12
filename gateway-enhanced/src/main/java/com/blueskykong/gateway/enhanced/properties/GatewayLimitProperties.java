@@ -10,6 +10,9 @@ public class GatewayLimitProperties {
 
     private RedisRate redisRate;
 
+    /**
+     * 节流阀；[车辆] 风门；喉咙
+     */
     private Throttle throttle;
 
 
@@ -31,8 +34,15 @@ public class GatewayLimitProperties {
 
     public static class RedisRate {
 
+        /**
+         * 补充率
+         *
+         */
         int replenishRate;
 
+        /**
+         * 破裂的能力
+         */
         int burstCapacity;
 
         public int getReplenishRate() {
