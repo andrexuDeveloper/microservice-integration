@@ -82,6 +82,12 @@ public class ServiceConfig {
         return new HeaderEnhanceFilter();
     }
 
+
+    /**
+     *   初始化的limiter 组件
+     * @param gatewayLimitProperties
+     * @return
+     */
     @Bean(name = "customRateLimiter")
     @Primary
     public RedisRateLimiter myRateLimiter(GatewayLimitProperties gatewayLimitProperties) {
@@ -89,6 +95,8 @@ public class ServiceConfig {
         if (Objects.isNull(redisRate)) {
             throw new ServerException(ErrorCodes.PROPERTY_NOT_INITIAL);
         }
+        //  redis-rate-limiter.replenishRate: 10 # 每秒补充10个
+        //	            redis-rate-limiter.burstCapacity: 20 # 突发20个
         return new RedisRateLimiter(redisRate.getReplenishRate(), redisRate.getBurstCapacity());
     }
 
