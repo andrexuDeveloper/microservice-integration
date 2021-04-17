@@ -10,6 +10,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import java.util.Map;
 
 /**
+ * 具体处理header  authorization
  * @author keets
  * @date 2017/9/25
  */

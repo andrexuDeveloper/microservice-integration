@@ -4,6 +4,7 @@ import com.blueskykong.gateway.enhanced.http.HeaderEnhanceFilter;
 import com.blueskykong.gateway.enhanced.properties.PermitAllUrlProperties;
 import com.blueskykong.gateway.enhanced.security.CustomRemoteTokenServices;
 import com.blueskykong.gateway.enhanced.security.OAuth2AccessToken;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import java.util.Objects;
  * @author keets
  * @data 2018/9/18.
  */
+@Slf4j
 public class AuthorizationFilter implements GlobalFilter, Ordered {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationFilter.class);
@@ -42,6 +44,7 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        log.info("path {} start",request.getPath());
         if (predicate(exchange)) {
             request = headerEnhanceFilter.doFilter(request);
             String accessToken = extractHeaderToken(request);
@@ -53,6 +56,11 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange);
     }
 
+    /**
+     * 判断是否需要auth的登录url
+     * @param serverWebExchange
+     * @return
+     */
     public Boolean predicate(ServerWebExchange serverWebExchange) {
         URI uri = serverWebExchange.getRequest().getURI();
         String requestUri = uri.getPath();
@@ -71,6 +79,11 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
         return url.contains("/login/logout");
     }
 
+    /**
+     * url
+     * @param url
+     * @return
+     */
     private boolean isPermitUrl(String url) {
         return permitAllUrlProperties.isPermitAllUrl(url) || url.contains("/login/oauth");
     }

@@ -1,5 +1,6 @@
 package com.blueskykong.gateway.enhanced.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.util.Map;
  * @author keets
  * @data 2018/12/11.
  */
+@Slf4j
 @Component
 public class GlobalErrorAttributes extends DefaultErrorAttributes {
 
@@ -29,6 +31,7 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
     private Map<String, Object> assembleError(ServerRequest request) {
         Map<String, Object> errorAttributes = new LinkedHashMap<>();
         Throwable error = getError(request);
+        log.error("",error);
         if (error instanceof ServerException) {
             errorAttributes.put("code", ((ServerException) error).getCode().getCode());
             errorAttributes.put("data", error.getMessage());

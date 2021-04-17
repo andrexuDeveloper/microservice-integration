@@ -54,12 +54,12 @@ public class ServiceConfig {
         return resourceServerTokenServices;
     }
 
-//    @Bean
-//    public AuthorizationFilter authorizationFilter(CustomRemoteTokenServices customRemoteTokenServices,
-//                                                   HeaderEnhanceFilter headerEnhanceFilter,
-//                                                   PermitAllUrlProperties permitAllUrlProperties) {
-//        return new AuthorizationFilter(customRemoteTokenServices, headerEnhanceFilter, permitAllUrlProperties);
-//    }
+    @Bean
+    public AuthorizationFilter authorizationFilter(CustomRemoteTokenServices customRemoteTokenServices,
+                                                   HeaderEnhanceFilter headerEnhanceFilter,
+                                                   PermitAllUrlProperties permitAllUrlProperties) {
+        return new AuthorizationFilter(customRemoteTokenServices, headerEnhanceFilter, permitAllUrlProperties);
+    }
 
 
     /**
@@ -88,16 +88,16 @@ public class ServiceConfig {
      * @param gatewayLimitProperties
      * @return
      */
-    @Bean(name = "customRateLimiter")
-    @Primary
-    public RedisRateLimiter myRateLimiter(GatewayLimitProperties gatewayLimitProperties) {
-        GatewayLimitProperties.RedisRate redisRate = gatewayLimitProperties.getRedisRate();
-        if (Objects.isNull(redisRate)) {
-            throw new ServerException(ErrorCodes.PROPERTY_NOT_INITIAL);
-        }
-        //  redis-rate-limiter.replenishRate: 10 # 每秒补充10个
-        //	            redis-rate-limiter.burstCapacity: 20 # 突发20个
-        return new RedisRateLimiter(redisRate.getReplenishRate(), redisRate.getBurstCapacity());
-    }
+//    @Bean(name = "customRateLimiter")
+//    @Primary
+//    public RedisRateLimiter myRateLimiter(GatewayLimitProperties gatewayLimitProperties) {
+//        GatewayLimitProperties.RedisRate redisRate = gatewayLimitProperties.getRedisRate();
+//        if (Objects.isNull(redisRate)) {
+//            throw new ServerException(ErrorCodes.PROPERTY_NOT_INITIAL);
+//        }
+//        //  redis-rate-limiter.replenishRate: 10 # 每秒补充10个
+//        //	            redis-rate-limiter.burstCapacity: 20 # 突发20个
+//        return new RedisRateLimiter(redisRate.getReplenishRate(), redisRate.getBurstCapacity());
+//    }
 
 }

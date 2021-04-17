@@ -1,5 +1,6 @@
 package com.blueskykong.gateway.enhanced.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @author keets
  * @data 2018/12/11.
  */
+@Slf4j
 @Component
 @Order(-2)
 public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHandler {

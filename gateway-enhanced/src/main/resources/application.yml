@@ -49,12 +49,12 @@ spring:
       discovery:
         locator:
           enabled: true
-      default-filters:
-      - AddRequestHeader=X-Request-Foo, Bar
-      - name: RequestRateLimiter
-        args:
-          key-resolver: "#{@remoteAddrKeyResolver}"
-          rate-limiter: "#{@customRateLimiter}"   # token
+#      default-filters:
+#      - AddRequestHeader=X-Request-Foo, Bar
+#      - name: RequestRateLimiter
+#        args:
+#          key-resolver: "#{@remoteAddrKeyResolver}"
+#          rate-limiter: "#{@customRateLimiter}"   # token
 
       routes:
       - id: ingredients-fallback
