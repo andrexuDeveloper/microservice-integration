@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+        <property name="LOG_HOME">./logs/zbrd-service/</property>
+        <!-- 日志备份目录 -->
+        <property name="BACKUP_HOME">{LOG_HOME}/backup</property>
+        <property name="INFRA_NAME">zbrd-service</property>
+        <property name="INFRA_DEV_NAME">zbrd-service-dev</property>
+        <property name="REQ_RES_NAME">req</property>
+        <property name="ERROR_FILE_NAME">error</property>
+        <property name="QUEUE_ERROR_FILENAME">AsyncQueueError</property>
+        <property name="SLOW_SQL_FILE_NAME">slow_sql</property>
+        <property name="SERVER_NAME">global</property>
+        <property name="DISCOVERY_TEST_NAME">discovery_test</property>
+        <property name="LOG_FILE_PATTERN">[%d{yyyy-MM-dd.HH:mm:ss.SSS}|%X{IP}|%p|%t@%X{_KRY_GLOBAL_MSG_ID}|%X{URL}%c.%M(%L):|%m%n</property>
+        <property name="CONSOLE_FILE_PATTERN_COLOR">%style{%d{yyyy-MM-dd.HH:mm:ss.SSS}}{Green} %style{%X{IP}}{Magenta} %highlight{%p}{STYLE=Logback} %style{%t@%X{_KRY_GLOBAL_MSG_ID}}{Red} %style{%X{URL}%c.%M(%L)}{Cyan} :| %m%n</property>
+    </properties>
+
+    <Appenders>
+        <RollingRandomAccessFile name="infra"
+                                 fileName="${LOG_HOME}/${INFRA_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${INFRA_NAME}.%d{yyyyMMdd}.log">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+        <!--<Kafka name="kafka.oplog" topic="dev_order_snapshot" ignoreExceptions="false">-->
+        <!--<PatternLayout pattern="%message" />-->
+        <!--<Property name="bootstrap.servers">10.162.52.75:9092,10.161.213.246:9092</Property>-->
+        <!--<Property name="metadata.fetch.timeout.ms">8000</Property>-->
+        <!--<Property name="timeout.ms">5000</Property>-->
+        <!--<Property name="metadata.max.age.ms">600000</Property>-->
+        <!--</Kafka>-->
+
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_FILE_PATTERN_COLOR}"/>
+        </Console>
+
+        <RollingRandomAccessFile name="INFRA"
+                                 fileName="${LOG_HOME}/${INFRA_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${INFRA_NAME}.%d{yyyyMMdd}.log">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="INFRA_DEV"
+                                 fileName="${LOG_HOME}/${INFRA_DEV_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${INFRA_DEV_NAME}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="REQUEST"
+                                 fileName="${LOG_HOME}/${REQ_RES_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${REQ_RES_NAME}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="ERROR"
+                                 fileName="${LOG_HOME}/${ERROR_FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${ERROR_FILE_NAME}.%d{yyyyMMdd}.log">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="QUEUE_ERROR"
+                                 fileName="${LOG_HOME}/${QUEUE_ERROR_FILENAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${QUEUE_ERROR_FILENAME}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="SLOW_SQL"
+                                 fileName="${LOG_HOME}/${SLOW_SQL_FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${SLOW_SQL_FILE_NAME}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="DISCOVERY_TEST"
+                                 fileName="${LOG_HOME}/${DISCOVERY_TEST_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyyMM}/${DISCOVERY_TEST_NAME}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+
+
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.kafka" level="${oplog.logLevel}"/>
+        <!--<Logger name="KAFKA" additivity="false" level="info">-->
+            <!--<AppenderRef ref="kafka.oplog"/>-->
+            <!--<AppenderRef ref="Console"/>-->
+        <!--</Logger>-->
+
+
+        <Logger name="com.keruyun.framework.async" level="info"/>
+        <Logger name="com.alibaba.druid.filter.stat.StatFilter"
+                additivity="false">
+            <AppenderRef ref="SLOW_SQL"/>
+            <AppenderRef ref="INFRA_DEV"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="JdbcTemplateExt" additivity="false" level="DEBUG">
+            <AppenderRef ref="INFRA"/>
+            <AppenderRef ref="INFRA_DEV"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="info"/>
+        <Logger name="org.quartz" level="info"/>
+        <Logger name="org.apache" level="info"/>
+        <Logger name="org.quartz-scheduler" level="info"/>
+        <Logger name="com.alibaba.druid" level="info"/>
+        <Logger name="java.sql" level="info"/>
+        <Logger name="druid.sql" level="info"/>
+
+        <Logger name="net.rubyeye.xmemcached" level="info"/>
+        <Logger name="com.google.code.yanf4j" level="info"/>
+        <Logger name="AsyncQueueError" additivity="false" level="info">
+            <AppenderRef ref="QUEUE_ERROR"/>
+            <AppenderRef ref="INFRA"/>
+            <AppenderRef ref="INFRA_DEV"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.apache.log4j.xml" level="info"/>
+        <Logger name="com.keruyun.commons.jdbc.ClassPropertyRowMapper"
+                level="INFO"/>
+        <Logger name="com.keruyun.commons.jdbc.AnnotationRowMapper"
+                level="INFO"/>
+        <Logger name="com.keruyun.infra.mapper"
+                level="DEBUG"/>
+
+
+        <Logger name="Request" additivity="false" level="info">
+            <!--
+			<AppenderRef ref="REQUEST" />-->
+            <AppenderRef ref="INFRA"/>
+            <!--
+            <AppenderRef ref="INFRA_DEV" />-->
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="infra_base" additivity="false" level="info">
+            <AppenderRef ref="infra"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.keruyun.cloud.resources" level="info">
+            <AppenderRef ref="DISCOVERY_TEST"/>
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!--
+        <Logger name="org.springframework.data.redis" level="debug" />
+        <Logger name="redis.clients.jedis" level="debug" />
+        <Logger name="org.springframework.transaction.support" level="debug" />
+         -->
+
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="infra"/>
+            <!--
+            <AppenderRef ref="INFRA_DEV" />-->
+            <AppenderRef ref="ERROR"/>
+        </Root>
+
+
+    </Loggers>
+</Configuration>
