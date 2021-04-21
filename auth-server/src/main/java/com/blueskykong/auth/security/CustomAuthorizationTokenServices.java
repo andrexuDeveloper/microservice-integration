@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
+ * 现在到了为用户创建token，这边主要与自定义的接口AuthorizationServerTokenServices有关。AuthorizationServerTokenServices主要有如下三个方法
  * Created by keets on 2017/8/5.
  */
 public class CustomAuthorizationTokenServices implements AuthorizationServerTokenServices, ConsumerTokenServices {
@@ -48,6 +49,12 @@ public class CustomAuthorizationTokenServices implements AuthorizationServerToke
         Assert.notNull(tokenStore, "tokenStore must be set");
     }
 
+    /**
+     * 创建token
+     * @param authentication
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     @Transactional
     public OAuth2AccessToken createAccessToken(OAuth2Authentication authentication) throws AuthenticationException {
@@ -129,6 +136,13 @@ public class CustomAuthorizationTokenServices implements AuthorizationServerToke
         return accessToken;
     }
 
+
+    /***
+     * 获取token
+     *
+     * @param authentication
+     * @return
+     */
     @Override
     public OAuth2AccessToken getAccessToken(OAuth2Authentication authentication) {
         return tokenStore.getAccessToken(authentication);

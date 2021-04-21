@@ -49,6 +49,8 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
             request = headerEnhanceFilter.doFilter(request);
             String accessToken = extractHeaderToken(request);
 
+            log.info("accessToken {}",accessToken);
+
             customRemoteTokenServices.loadAuthentication(accessToken);
             LOGGER.info("success auth token and permission!");
         }

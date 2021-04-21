@@ -3,6 +3,7 @@ package com.blueskykong.gateway.enhanced.security;
 
 import com.blueskykong.gateway.enhanced.exception.ErrorCode;
 import com.blueskykong.gateway.enhanced.exception.ServerException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.cloud.client.ServiceInstance;
@@ -31,6 +32,7 @@ import java.util.Map;
  * @author keets
  * @date 2018/9/20
  */
+@Slf4j
 public class CustomRemoteTokenServices {
 
     private LoadBalancerClient loadBalancerClient;
@@ -78,14 +80,22 @@ public class CustomRemoteTokenServices {
         this.tokenName = tokenName;
     }
 
+
+    /**
+     *
+     * rpc 调用
+     * @param accessToken
+     */
     public void loadAuthentication(String accessToken) {
 
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
 
         formData.add(tokenName, accessToken);
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", getAuthorizationHeader(clientId, clientSecret));
 
+        // 调用auth服务的oauth认证
         ServiceInstance serviceInstance = loadBalancerClient.choose("auth");
         if (serviceInstance == null) {
             throw new RuntimeException("Failed to choose an auth instance.");
@@ -133,6 +143,8 @@ public class CustomRemoteTokenServices {
         @SuppressWarnings("rawtypes")
         Map map = new HashMap();
         try {
+            log.info("path {}",path);
+
             map = restTemplate.exchange(path, HttpMethod.POST,
                     new HttpEntity<MultiValueMap<String, String>>(formData, headers), Map.class).getBody();
         } catch (HttpClientErrorException e1) {

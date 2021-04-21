@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ *  自定义的验证类
  * @author keets
  * @date 2017/8/5
  */

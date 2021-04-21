@@ -20,6 +20,7 @@ gateway:
       refill-period: 5
 
 
+###   访问资源配置
 security:
   oauth2:
     client:

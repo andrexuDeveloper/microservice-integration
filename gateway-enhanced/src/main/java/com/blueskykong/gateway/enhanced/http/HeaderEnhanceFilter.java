@@ -33,11 +33,13 @@ public class HeaderEnhanceFilter {
             if (isJwtBearerToken(authorization)) {
                 try {
                     authorization = StringUtils.substringBetween(authorization, ".");
-                    String decoded = new String(Base64.decodeBase64(authorization));
+//                    String decoded = new String(Base64.decodeBase64(authorization));
+//
+//                    Map properties = new ObjectMapper().readValue(decoded, Map.class);
 
-                    Map properties = new ObjectMapper().readValue(decoded, Map.class);
-
-                    String userId = (String) properties.get(USER_ID_IN_HEADER);
+                    String userId ="1110001";
+                            //(String) properties.get(USER_ID_IN_HEADER);
+                    // 获取userId的过程
 
                     req = request.mutate()
                             .header(USER_ID_IN_HEADER, userId)

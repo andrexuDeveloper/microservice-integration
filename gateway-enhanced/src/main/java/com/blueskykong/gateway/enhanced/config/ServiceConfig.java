@@ -43,6 +43,11 @@ public class ServiceConfig {
         return new RestTemplate();
     }
 
+    /***
+     *  远程调用的service
+     * @param restTemplate
+     * @return
+     */
     @Bean
     @Order(100)
     public CustomRemoteTokenServices customRemoteTokenServices(RestTemplate restTemplate) {

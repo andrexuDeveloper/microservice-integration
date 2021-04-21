@@ -61,6 +61,11 @@ public class GatewayConfiguration {
         return new GatewayLimitProperties();
     }
 
+
+    /**
+     * 访问资源配置
+     * @return
+     */
     @Bean
     @ConfigurationProperties(prefix = "security.oauth2")
     public ResourceServerProperties resourceServerProperties() {
