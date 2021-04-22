@@ -67,6 +67,12 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
         URI uri = serverWebExchange.getRequest().getURI();
         String requestUri = uri.getPath();
         String authorization = serverWebExchange.getRequest().getHeaders().getFirst("Authorization");
+
+       //临时使用
+        if(StringUtils.startsWith(requestUri,"/web")){
+            return false;
+        }
+
         if (isPermitUrl(requestUri) && (StringUtils.isBlank(authorization) || (StringUtils.isNotBlank(authorization) &&
                 StringUtils.countMatches(authorization, ".") != 2))) {
             return false;

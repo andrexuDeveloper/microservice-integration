@@ -29,4 +29,6 @@ logging:
     reactor.ipc.netty: info
     com.blueskykong.gateway.enhanced: debug
 
-management.endpoints.web.exposure.include: '*'
+#management.endpoints.web.exposure.include: '*'
+#要想查看详细的应用健康信息需要配置management.endpoint.health.show-details 的值为always
+management.endpoint.health.show-details: always

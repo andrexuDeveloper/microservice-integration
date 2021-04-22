@@ -4,6 +4,7 @@ package com.blueskykong.auth.exception;
  * Created by keets on 2016/12/5.
  */
 import com.netflix.hystrix.exception.HystrixRuntimeException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
 
+
+@Slf4j
 public class CustomWebResponseExceptionTranslator extends DefaultWebResponseExceptionTranslator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomWebResponseExceptionTranslator.class);
@@ -23,6 +26,8 @@ public class CustomWebResponseExceptionTranslator extends DefaultWebResponseExce
         OAuth2Exception oAuth2Exception;
         HttpHeaders headers = new HttpHeaders();
         int httpStatus;
+
+        log.error("exception handler",e);
 
         if (e instanceof HystrixRuntimeException) {
             Throwable actual = ((HystrixRuntimeException) e).getFallbackException().getCause().getCause();

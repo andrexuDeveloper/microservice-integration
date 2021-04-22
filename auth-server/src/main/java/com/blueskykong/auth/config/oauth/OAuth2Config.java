@@ -42,6 +42,12 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
         return new JdbcClientDetailsService(dataSource);
     }
 
+    /**
+     *
+     * token 主要存储
+     * @param dataSource
+     * @return
+     */
     @Bean
     public JdbcTokenStore tokenStore(DataSource dataSource) {
         return new JdbcTokenStore(dataSource);

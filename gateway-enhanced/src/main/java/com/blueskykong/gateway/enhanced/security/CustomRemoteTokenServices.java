@@ -51,6 +51,10 @@ public class CustomRemoteTokenServices {
 
     private final String ERROR = "error";
 
+
+    public CustomRemoteTokenServices() {
+    }
+
     public CustomRemoteTokenServices(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
         restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
@@ -127,7 +131,7 @@ public class CustomRemoteTokenServices {
         this.loadBalancerClient = loadBalancerClient;
     }
 
-    private String getAuthorizationHeader(String clientId, String clientSecret) {
+    public static String getAuthorizationHeader(String clientId, String clientSecret) {
         String creds = String.format("%s:%s", clientId, clientSecret);
         try {
             return "Basic " + new String(Base64.encode(creds.getBytes("UTF-8")));
